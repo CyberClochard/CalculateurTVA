@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "HT/TTC Calc",
+  "name": "Calculateur HT/TTC - Calcul de TVA en ligne gratuit",
+  "description": "Calculateur HT/TTC gratuit et professionnel pour vos calculs de TVA. Interface moderne et intuitive.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,9 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#6366f1",
+  "background_color": "#ffffff",
+  "categories": ["finance", "productivity", "utilities"],
+  "lang": "fr",
+  "dir": "ltr"
 }

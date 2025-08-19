@@ -1,43 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="theme-color" content="#6366f1" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Calculateur HT/TTC - Calcul de TVA en ligne gratuit | HTTTC Hack</title>
+    <meta name="description" content="Calculateur HT/TTC gratuit et professionnel. Calculez facilement vos montants HT, TTC et TVA avec les taux 20%, 10%, 5.5% et 2.1%. Interface moderne et intuitive." />
+    <meta name="keywords" content="calculateur HT TTC, calcul TVA, montant HT, montant TTC, taux TVA, 20%, 10%, 5.5%, 2.1%, calculatrice TVA, conversion HT TTC" />
+    <meta name="author" content="HTTTC Hack" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://htttchack.com/" />
+    <meta property="og:title" content="Calculateur HT/TTC - Calcul de TVA en ligne gratuit" />
+    <meta property="og:description" content="Calculateur HT/TTC gratuit et professionnel. Calculez facilement vos montants HT, TTC et TVA avec les taux 20%, 10%, 5.5% et 2.1%." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://htttchack.com/" />
+    <meta property="twitter:title" content="Calculateur HT/TTC - Calcul de TVA en ligne gratuit" />
+    <meta property="twitter:description" content="Calculateur HT/TTC gratuit et professionnel. Calculez facilement vos montants HT, TTC et TVA." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://htttchack.com/" />
+    
+    <!-- Favicon et icônes -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID', {
+        page_title: 'Calculateur HT/TTC',
+        page_location: window.location.href
+      });
+    </script>
+    
+    <!-- Preconnect pour améliorer les performances -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Structured Data pour le SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Calculateur HT/TTC",
+      "description": "Calculateur gratuit pour convertir les montants HT en TTC et vice versa avec calcul automatique de la TVA",
+      "url": "https://htttchack.com/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "HTTTC Hack"
+      }
+    }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>Vous devez activer JavaScript pour utiliser cette application.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    
+    <!-- Footer avec mentions légales -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+      <div class="container mx-auto px-4 text-center">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Calculateur HT/TTC</h3>
+            <p class="text-gray-300 text-sm">
+              Outil gratuit et professionnel pour vos calculs de TVA. 
+              Simple, rapide et précis.
+            </p>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Informations légales</h3>
+            <ul class="text-gray-300 text-sm space-y-2">
+              <li><a href="/mentions-legales" class="hover:text-indigo-400 transition-colors">Mentions légales</a></li>
+              <li><a href="/politique-confidentialite" class="hover:text-indigo-400 transition-colors">Politique de confidentialité</a></li>
+              <li><a href="/conditions-utilisation" class="hover:text-indigo-400 transition-colors">Conditions d'utilisation</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact</h3>
+            <p class="text-gray-300 text-sm">
+              Questions ou suggestions ?<br/>
+              <a href="mailto:contact@htttchack.com" class="text-indigo-400 hover:text-indigo-300">
+                contact@htttchack.com
+              </a>
+            </p>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-700 mt-8 pt-8">
+          <p class="text-gray-400 text-sm">
+            © 2024 HTTTC Hack. Tous droits réservés. 
+            Ce calculateur est fourni à titre informatif et ne constitue pas un conseil fiscal.
+          </p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
