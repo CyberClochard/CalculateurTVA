@@ -241,7 +241,6 @@ const CalculateurHTTTC = () => {
       title="Copier la valeur"
       aria-label={`Copier ${formaterMontant(valeur)} dans le presse-papiers`}
       aria-describedby={`copie-${type}`}
-      role="button"
     >
       {copieFeedback[type] ? (
         <div id={`copie-${type}`} className="text-green-600 font-medium text-xs animate-scale-in" role="status" aria-live="polite">
@@ -254,7 +253,6 @@ const CalculateurHTTTC = () => {
           stroke="currentColor" 
           viewBox="0 0 24 24"
           aria-hidden="true"
-          role="img"
         >
           <path 
             strokeLinecap="round" 
@@ -300,7 +298,6 @@ const CalculateurHTTTC = () => {
                 inputMode="decimal"
                 aria-describedby="erreur-HT"
                 aria-label="Saisir le montant hors taxes"
-                role="textbox"
               />
               <BoutonCopie valeur={parseFloat(montantHT)} type="HT" />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium" aria-hidden="true">€</div>
@@ -329,7 +326,6 @@ const CalculateurHTTTC = () => {
                 inputMode="decimal"
                 aria-describedby="erreur-TTC"
                 aria-label="Saisir le montant toutes taxes comprises"
-                role="textbox"
               />
               <BoutonCopie valeur={parseFloat(montantTTC)} type="TTC" />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium" aria-hidden="true">€</div>
@@ -357,7 +353,7 @@ const CalculateurHTTTC = () => {
                     ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-indigo-500 shadow-xl scale-105' 
                     : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200 hover:border-indigo-300 hover:shadow-md'
                 }`}
-                aria-pressed={tauxTVA === taux}
+                aria-checked={tauxTVA === taux}
                 aria-label={`Sélectionner le taux de TVA de ${taux}%`}
                 role="radio"
               >
