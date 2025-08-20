@@ -210,10 +210,10 @@ const CalculateurHTTTC = () => {
       // Afficher le feedback
       setCopieFeedback(prev => ({ ...prev, [type]: true }));
       
-      // Masquer le feedback après 2 secondes
+      // Masquer le feedback après 1 seconde (au lieu de 2)
       setTimeout(() => {
         setCopieFeedback(prev => ({ ...prev, [type]: false }));
-      }, 2000);
+      }, 1000);
     } catch (err) {
       console.error('Erreur lors de la copie:', err);
     }
@@ -237,7 +237,7 @@ const CalculateurHTTTC = () => {
     <button
       onClick={() => copierValeur(valeur, type)}
       disabled={!valeur || valeur === 0}
-      className={`absolute ${position === 'right' ? 'right-12' : 'right-4'} top-1/2 -translate-y-1/2 p-2 rounded-lg transition-all duration-200 hover:bg-indigo-100 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group`}
+      className={`absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-all duration-200 hover:bg-indigo-100 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed group`}
       title="Copier la valeur"
       aria-label={`Copier ${formaterMontant(valeur)} dans le presse-papiers`}
       aria-describedby={`copie-${type}`}
@@ -263,6 +263,46 @@ const CalculateurHTTTC = () => {
         </svg>
       )}
     </button>
+  );
+
+  const CardResultat = ({ titre, valeur, type, couleur, sousTitre }) => (
+    <div 
+      onClick={() => copierValeur(valeur, type)}
+      className={`text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100 relative cursor-pointer transition-all duration-200 hover:shadow-md hover:scale-105 hover:border-${couleur}-200 group`}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          copierValeur(valeur, type);
+        }
+      }}
+      aria-label={`Cliquer pour copier ${formaterMontant(valeur)}`}
+    >
+      {copieFeedback[type] ? (
+        <div className="absolute inset-0 bg-green-50 border-2 border-green-200 rounded-xl flex items-center justify-center z-10 animate-pulse">
+          <div className="text-green-600 font-bold text-lg flex items-center gap-2">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            Copié !
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className={`text-2xl font-bold text-${couleur}-600 mb-1`}>
+            {formaterMontant(valeur)}
+          </div>
+          <div className="text-sm text-gray-600">{sousTitre}</div>
+        </>
+      )}
+      
+      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      </div>
+    </div>
   );
 
   return (
@@ -299,8 +339,8 @@ const CalculateurHTTTC = () => {
                 aria-describedby="erreur-HT"
                 aria-label="Saisir le montant hors taxes"
               />
+              <div className="absolute right-20 top-1/2 -translate-y-1/2 text-gray-400 font-medium" aria-hidden="true">€</div>
               <BoutonCopie valeur={parseFloat(montantHT)} type="HT" />
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium" aria-hidden="true">€</div>
             </div>
             {erreurs.HT && (
               <div id="erreur-HT" className="text-red-500 text-sm animate-slide-in-left" role="alert" aria-live="polite">
@@ -327,8 +367,8 @@ const CalculateurHTTTC = () => {
                 aria-describedby="erreur-TTC"
                 aria-label="Saisir le montant toutes taxes comprises"
               />
+              <div className="absolute right-20 top-1/2 -translate-y-1/2 text-gray-400 font-medium" aria-hidden="true">€</div>
               <BoutonCopie valeur={parseFloat(montantTTC)} type="TTC" />
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium" aria-hidden="true">€</div>
             </div>
             {erreurs.TTC && (
               <div id="erreur-TTC" className="text-red-500 text-sm animate-slide-in-right" role="alert" aria-live="polite">
@@ -371,29 +411,29 @@ const CalculateurHTTTC = () => {
           <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 border border-indigo-100 shadow-lg" role="region" aria-labelledby="resume-title">
             <h3 id="resume-title" className="text-lg font-semibold text-gray-800 mb-4 text-center">Résumé du calcul</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100 relative" role="region" aria-labelledby="ht-resultat">
-                <div id="ht-resultat" className="text-2xl font-bold text-indigo-600 mb-1" aria-label="Montant HT calculé">
-                  {formaterMontant(resultat.montantHT)}
-                </div>
-                <div className="text-sm text-gray-600">Montant HT</div>
-                <BoutonCopie valeur={resultat.montantHT} type="HT" position="right" />
-              </div>
+              <CardResultat 
+                titre="Montant HT"
+                valeur={resultat.montantHT}
+                type="HT"
+                couleur="indigo"
+                sousTitre="Montant HT"
+              />
               
-              <div className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100 relative" role="region" aria-labelledby="tva-resultat">
-                <div id="tva-resultat" className="text-2xl font-bold text-purple-600 mb-1" aria-label="Montant de TVA calculé">
-                  {formaterMontant(resultat.montantTVA)}
-                </div>
-                <div className="text-sm text-gray-600">TVA ({tauxTVA}%)</div>
-                <BoutonCopie valeur={resultat.montantTVA} type="TVA" position="right" />
-              </div>
+              <CardResultat 
+                titre="TVA"
+                valeur={resultat.montantTVA}
+                type="TVA"
+                couleur="purple"
+                sousTitre={`TVA (${tauxTVA}%)`}
+              />
               
-              <div className="text-center p-4 bg-white rounded-xl shadow-sm border border-gray-100 relative" role="region" aria-labelledby="ttc-resultat">
-                <div id="ttc-resultat" className="text-3xl font-bold text-pink-600 mb-1" aria-label="Montant TTC calculé">
-                  {formaterMontant(resultat.montantTTC)}
-                </div>
-                <div className="text-sm text-gray-600">Montant TTC</div>
-                <BoutonCopie valeur={resultat.montantTTC} type="TTCResult" position="right" />
-              </div>
+              <CardResultat 
+                titre="Montant TTC"
+                valeur={resultat.montantTTC}
+                type="TTCResult"
+                couleur="pink"
+                sousTitre="Montant TTC"
+              />
             </div>
           </div>
         </section>
