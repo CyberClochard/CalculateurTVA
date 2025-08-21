@@ -2,6 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FAQ = () => {
+  // Données structurées FAQ Schema.org
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Comment calculer la TVA à 20% avec le calculateur HT/TTC ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pour calculer la TVA à 20% : saisissez votre montant HT, sélectionnez le taux 20%, le calculateur affiche automatiquement le montant TTC et la TVA. Vous pouvez aussi saisir le montant TTC pour calculer le montant HT correspondant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelle est la différence entre HT et TTC dans le calcul de TVA ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HT (Hors Taxes) : montant sans la TVA, c'est le prix de base. TTC (Toutes Taxes Comprises) : montant final incluant la TVA. Formule : TTC = HT + (HT × Taux TVA). Exemple : 100€ HT + 20% TVA = 120€ TTC."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels sont les taux de TVA en France et comment les utiliser ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "20% (Taux normal) : la plupart des biens et services. 10% (Taux réduit) : restauration, transports, travaux de rénovation. 5.5% (Taux réduit) : livres, énergies renouvelables. 2.1% (Taux particulier) : médicaments remboursés, presse."
+        }
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 font-sans relative overflow-hidden">
       {/* Background decorations */}
@@ -10,6 +42,12 @@ const FAQ = () => {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-pink-400/30 to-purple-400/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" aria-hidden="true"></div>
       
       <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-10 w-full max-w-5xl border border-white/20 animate-fade-in relative z-10">
+        {/* Données structurées JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+        
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
             Questions Fréquentes
@@ -30,7 +68,8 @@ const FAQ = () => {
                 <h3 className="text-lg font-semibold text-gray-800">
                   Comment calculer la TVA à 20% avec le calculateur HT/TTC ?
                 </h3>
-                <svg className="w-5 h-5 text-indigo-500 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-indigo-500 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Icône de déroulement">
+                  <title>Cliquer pour développer la réponse</title>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </summary>
@@ -54,7 +93,8 @@ const FAQ = () => {
                 <h3 className="text-lg font-semibold text-gray-800">
                   Quelle est la différence entre HT et TTC dans le calcul de TVA ?
                 </h3>
-                <svg className="w-5 h-5 text-purple-500 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-purple-500 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Icône de déroulement">
+                  <title>Cliquer pour développer la réponse</title>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </summary>

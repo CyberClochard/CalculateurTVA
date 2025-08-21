@@ -1,6 +1,42 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import ResourcePreloader from './ResourcePreloader.jsx';
 
 const CalculateurHTTTC = () => {
+  // Données structurées WebSite Schema.org
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Calculateur HT/TTC",
+    "description": "Calculateur de TVA gratuit en ligne pour convertir les montants HT en TTC et vice versa",
+    "url": "https://calculateur-tva.skylogistics.fr",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://calculateur-tva.skylogistics.fr",
+      "query-input": "required name=search_term"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Calculateur-TVA",
+      "url": "https://calculateur-tva.skylogistics.fr"
+    }
+  };
+
+  // Données structurées WebApplication Schema.org
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur HT/TTC",
+    "description": "Outil de calcul de TVA gratuit et professionnel",
+    "url": "https://calculateur-tva.skylogistics.fr",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  };
   const [montantHT, setMontantHT] = useState('');
   const [montantTTC, setMontantTTC] = useState('');
   const [tauxTVA, setTauxTVA] = useState(20);
@@ -274,7 +310,10 @@ const CalculateurHTTTC = () => {
           stroke="currentColor" 
           viewBox="0 0 24 24"
           aria-hidden="true"
+          role="img"
+          aria-label="Icône de copie"
         >
+          <title>Copier le montant</title>
           <path 
             strokeLinecap="round" 
             strokeLinejoin="round" 
@@ -303,9 +342,10 @@ const CalculateurHTTTC = () => {
       {copieFeedback[type] ? (
         <div className="absolute inset-0 bg-green-50 border-2 border-green-200 rounded-xl flex items-center justify-center z-10 animate-pulse">
           <div className="text-green-600 font-bold text-lg flex items-center gap-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Icône de validation">
+            <title>Montant copié avec succès</title>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
             Copié !
           </div>
         </div>
@@ -319,7 +359,8 @@ const CalculateurHTTTC = () => {
       )}
       
       <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Icône de copie">
+          <title>Cliquer pour copier</title>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
         </svg>
       </div>
@@ -327,7 +368,46 @@ const CalculateurHTTTC = () => {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 font-sans relative overflow-hidden" role="main" aria-label="Calculateur HT/TTC">
+    <>
+      <Helmet>
+        <title>Calculateur HT/TTC - Calcul de TVA en ligne gratuit | Calculateur-TVA</title>
+        <meta name="description" content="Calculateur HT/TTC gratuit en ligne. Convertissez facilement vos montants HT en TTC et vice versa avec tous les taux de TVA français (20%, 10%, 5.5%, 2.1%)." />
+        <meta name="keywords" content="calculateur TVA, HT TTC, calcul TVA, taux TVA France, convertisseur HT TTC, TVA 20%, TVA 10%, TVA 5.5%" />
+        <meta name="author" content="Calculateur-TVA" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://calculateur-tva.skylogistics.fr" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Calculateur HT/TTC - Calcul de TVA en ligne gratuit" />
+        <meta property="og:description" content="Calculateur HT/TTC gratuit pour convertir vos montants HT en TTC et vice versa. Supporte tous les taux de TVA français." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://calculateur-tva.skylogistics.fr" />
+        <meta property="og:site_name" content="Calculateur-TVA" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Calculateur HT/TTC - Calcul de TVA gratuit" />
+        <meta name="twitter:description" content="Calculateur HT/TTC gratuit en ligne pour le calcul de TVA." />
+        
+        {/* Preload des ressources importantes */}
+        <link rel="preload" href="/src/index.css" as="style" />
+        <link rel="preload" href="/src/components/CalculateurHTTTC.jsx" as="script" />
+        
+        {/* Preloader des ressources critiques */}
+        <ResourcePreloader />
+        
+        {/* Données structurées JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+        />
+      </Helmet>
+      
+      <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 font-sans relative overflow-hidden" role="main" aria-label="Calculateur HT/TTC">
       {/* Background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20" aria-hidden="true"></div>
       <div className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" aria-hidden="true"></div>
@@ -460,6 +540,7 @@ const CalculateurHTTTC = () => {
         </section>
       </div>
     </main>
+    </>
   );
 };
 

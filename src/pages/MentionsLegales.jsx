@@ -1,7 +1,46 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const MentionsLegales = () => {
+  // Données structurées BreadcrumbList Schema.org
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "https://calculateur-tva.skylogistics.fr"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Mentions Légales",
+        "item": "https://calculateur-tva.skylogistics.fr/mentions-legales"
+      }
+    ]
+  };
+
   return (
+    <>
+      <Helmet>
+        <title>Mentions Légales - Calculateur HT/TTC | Calculateur-TVA</title>
+        <meta name="description" content="Mentions légales du calculateur HT/TTC gratuit en ligne. Informations sur l'éditeur, l'hébergement, la propriété intellectuelle et la responsabilité." />
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://calculateur-tva.skylogistics.fr/mentions-legales" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Mentions Légales - Calculateur HT/TTC" />
+        <meta property="og:description" content="Mentions légales du calculateur HT/TTC gratuit en ligne pour le calcul de TVA." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://calculateur-tva.skylogistics.fr/mentions-legales" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Mentions Légales - Calculateur HT/TTC" />
+        <meta name="twitter:description" content="Mentions légales du calculateur HT/TTC gratuit en ligne." />
+      </Helmet>
     <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 font-sans relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20" aria-hidden="true"></div>
@@ -9,6 +48,12 @@ const MentionsLegales = () => {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-pink-400/30 to-purple-400/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" aria-hidden="true"></div>
       
       <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-10 w-full max-w-4xl border border-white/20 animate-fade-in relative z-10">
+        {/* Données structurées JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
             Mentions Légales
@@ -100,6 +145,7 @@ const MentionsLegales = () => {
         </div>
       </div>
     </main>
+    </>
   );
 };
 
