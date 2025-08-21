@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 const CalculateurHTTTC = () => {
   const [montantHT, setMontantHT] = useState('');
@@ -15,6 +15,39 @@ const CalculateurHTTTC = () => {
   const [copieFeedback, setCopieFeedback] = useState({ HT: false, TTC: false, TVA: false, TTCResult: false });
 
   const tauxTVADisponibles = [20, 10, 5.5, 2.1];
+
+  // Recalculer automatiquement quand le taux de TVA change
+  useEffect(() => {
+    if (champActif === 'HT' && montantHT) {
+      const validation = validerInput(montantHT, 'HT');
+      if (validation.valide) {
+        const montantHTVal = parseFloat(montantHT);
+        const montantTVAVal = montantHTVal * (tauxTVA / 100);
+        const montantTTCVal = montantHTVal + montantTVAVal;
+        
+        setMontantTTC(montantTTCVal.toFixed(2));
+        setResultat({
+          montantHT: montantHTVal,
+          montantTVA: montantTVAVal,
+          montantTTC: montantTTCVal
+        });
+      }
+    } else if (champActif === 'TTC' && montantTTC) {
+      const validation = validerInput(montantTTC, 'TTC');
+      if (validation.valide) {
+        const montantTTCVal = parseFloat(montantTTC);
+        const montantHTVal = montantTTCVal / (1 + tauxTVA / 100);
+        const montantTVAVal = montantTTCVal - montantHTVal;
+        
+        setMontantHT(montantHTVal.toFixed(2));
+        setResultat({
+          montantHT: montantHTVal,
+          montantTVA: montantTVAVal,
+          montantTTC: montantTTCVal
+        });
+      }
+    }
+  }, [tauxTVA, montantHT, montantTTC, champActif]);
 
   // Formatage automatique des montants
   const formaterInput = (valeur) => {
@@ -169,19 +202,7 @@ const CalculateurHTTTC = () => {
 
   const handleTVAChange = (nouveauTaux) => {
     setTauxTVA(nouveauTaux);
-    
-    // Recalculer basé sur le champ actif
-    if (champActif === 'HT' && montantHT) {
-      const validation = validerInput(montantHT, 'HT');
-      if (validation.valide) {
-        calculerDepuisHT(validation.valeur);
-      }
-    } else if (champActif === 'TTC' && montantTTC) {
-      const validation = validerInput(montantTTC, 'TTC');
-      if (validation.valide) {
-        calculerDepuisTTC(validation.valeur);
-      }
-    }
+    // Le useEffect se charge automatiquement du recalcul
   };
 
   const handleFocus = (type) => {

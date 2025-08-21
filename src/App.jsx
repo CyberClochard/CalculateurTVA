@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CalculateurHTTTC from './components/CalculateurHTTTC';
-import MentionsLegales from './pages/MentionsLegales';
-import PolitiqueConfidentialite from './pages/PolitiqueConfidentialite';
-import FAQ from './pages/FAQ';
+import CalculateurHTTTC from './components/CalculateurHTTTC.jsx';
+import MentionsLegales from './pages/MentionsLegales.jsx';
+import PolitiqueConfidentialite from './pages/PolitiqueConfidentialite.jsx';
+import FAQ from './pages/FAQ.jsx';
 
 function App() {
   return (
