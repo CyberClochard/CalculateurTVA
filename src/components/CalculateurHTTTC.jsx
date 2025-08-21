@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import ResourcePreloader from './ResourcePreloader.jsx';
 
@@ -538,6 +539,39 @@ const CalculateurHTTTC = () => {
             </div>
           </div>
         </section>
+
+        {/* Footer avec liens */}
+        <footer className="mt-12 text-center">
+          <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-white/20">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Liens utiles</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="space-y-2">
+                <h4 className="font-semibold text-gray-700">Calculateur</h4>
+                <Link to="/" className="block text-indigo-600 hover:text-indigo-800 transition-colors">
+                  🧮 Calculateur HT/TTC
+                </Link>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-semibold text-gray-700">Articles</h4>
+                <Link to="/articles" className="block text-indigo-600 hover:text-indigo-800 transition-colors">
+                  📚 Articles TVA
+                </Link>
+                <Link to="/faq" className="block text-indigo-600 hover:text-indigo-800 transition-colors">
+                  ❓ Questions fréquentes
+                </Link>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-semibold text-gray-700">Légal</h4>
+                <Link to="/mentions-legales" className="block text-indigo-600 hover:text-indigo-800 transition-colors">
+                  📋 Mentions légales
+                </Link>
+                <Link to="/politique-confidentialite" className="block text-indigo-600 hover:text-indigo-800 transition-colors">
+                  🔒 Politique de confidentialité
+                </Link>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </main>
     </>
