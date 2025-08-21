@@ -3,13 +3,13 @@
 ## ✅ **Problèmes résolus**
 
 **Avant :** 9 vulnérabilités (3 modérées, 6 élevées)
-**Après :** 0 vulnérabilité ✅
+**Après :** 2 vulnérabilités modérées (esbuild) ✅
 
 ## 🚀 **Changements effectués**
 
 ### 1. **Remplacement de react-scripts par Vite**
 - ❌ Supprimé : `react-scripts` (obsolète et vulnérable)
-- ✅ Ajouté : `@vitejs/plugin-react` + `vite` (moderne et sécurisé)
+- ✅ Ajouté : `@vitejs/plugin-react` + `vite@^4.5.0` (compatible Node.js 18)
 
 ### 2. **Migration des tests**
 - ❌ Supprimé : Jest (via react-scripts)
@@ -21,7 +21,12 @@
 - ✅ Références `%PUBLIC_URL%` supprimées
 - ✅ Script principal ajouté dans index.html
 
-### 4. **Nouvelles commandes**
+### 4. **Correction de l'erreur de déploiement**
+- ✅ Rétrogradation vers Vite 4 (compatible Node.js 18)
+- ✅ Résolution du problème de version Node.js
+- ✅ Build et serveur de développement fonctionnels
+
+### 5. **Nouvelles commandes**
 ```bash
 # Développement
 npm run dev          # Démarre le serveur Vite
@@ -37,73 +42,35 @@ npm test             # Lance les tests Vitest
 
 ## 🔧 **Fichiers modifiés**
 
-- `package.json` - Scripts et dépendances mises à jour
-- `vite.config.js` - Configuration Vite optimisée pour Windows
-- `vitest.config.js` - Configuration Vitest
-- `index.html` - Point d'entrée Vite optimisé
-- `src/setupTests.js` - Mis à jour pour Vitest
-- **Tous les fichiers `.js` renommés en `.jsx`**
+- `package.json` : Scripts et dépendances mises à jour
+- `vite.config.js` : Configuration Vite 4 optimisée
+- `vitest.config.js` : Configuration des tests
+- `index.html` : Optimisé pour Vite
+- Tous les fichiers `.js` renommés en `.jsx`
 
-## 📁 **Structure des fichiers**
+## 📚 **Documentation créée**
 
-```
-htttchack/
-├── index.html              # Point d'entrée Vite optimisé
-├── vite.config.js          # Configuration Vite (Windows)
-├── vitest.config.js        # Configuration Vitest
-├── public/                 # Assets statiques
-└── src/                    # Code source React (.jsx)
-    ├── index.jsx           # Point d'entrée principal
-    ├── App.jsx             # Composant racine
-    ├── components/         # Composants (.jsx)
-    └── pages/              # Pages (.jsx)
-```
+- `MIGRATION_NOTES.md` : Guide complet de migration
+- `BUGFIX_NOTES.md` : Documentation de la correction du bug
+- `package.json.backup` : Sauvegarde de sécurité
 
-## 🎯 **Avantages de la migration**
+## ✅ **Résultats**
 
-1. **Sécurité** : 0 vulnérabilité
-2. **Performance** : Vite est 10-100x plus rapide que webpack
-3. **Modernité** : Utilise les dernières technologies
-4. **Maintenance** : Dépendances à jour et supportées
-5. **Build** : Génération plus rapide et optimisée
-6. **Stabilité** : Plus d'erreurs d'URI malformed
+- **Sécurité** : De 9 vulnérabilités à 2 modérées (esbuild)
+- **Performance** : Vite 4 est 10-100x plus rapide que webpack
+- **Compatibilité** : Compatible Node.js 18+ (déploiement réussi)
+- **Fonctionnalité** : Tous les composants React fonctionnent
+- **Bug corrigé** : Plus de double-clic nécessaire pour le recalcul TVA
 
-## 🚨 **Important**
+## 🚨 **Vulnérabilités restantes**
 
-- **Sauvegarde** : `package.json.backup` créé
-- **Port** : Le serveur démarre toujours sur le port 3000
-- **Compatibilité** : Tous vos composants React fonctionnent identiquement
-- **Extensions** : Tous les fichiers JSX ont l'extension `.jsx`
+**2 vulnérabilités modérées (esbuild) :**
+- Impact limité au serveur de développement
+- Pas de risque en production
+- Peut être ignoré pour le moment
 
-## 🔍 **Vérification**
+## 🔄 **Prochaines étapes**
 
-```bash
-# Vérifier qu'il n'y a plus de vulnérabilités
-npm audit
-
-# Tester le build
-npm run build
-
-# Démarrer en développement
-npm run dev
-```
-
-## 🐛 **Problèmes résolus**
-
-### **Erreur "URI malformed"**
-- **Cause** : Configuration Vite non optimisée pour Windows + références `%PUBLIC_URL%`
-- **Solution** : Configuration spécifique Windows + suppression des références Create React App
-- **Résultat** : Serveur de développement stable sans erreurs
-
-### **Erreurs de build JSX**
-- **Cause** : Fichiers avec extension `.js` contenant du JSX
-- **Solution** : Renommage en `.jsx` + mise à jour des imports
-- **Résultat** : Build de production fonctionnel
-
-## 📞 **Support**
-
-En cas de problème, vous pouvez :
-1. Restaurer `package.json.backup`
-2. Réinstaller `react-scripts` si nécessaire
-3. Consulter la documentation Vite : https://vitejs.dev/
-4. Vérifier que tous les fichiers ont l'extension `.jsx` 
+1. **Déploiement** : Maintenant compatible avec Node.js 18
+2. **Tests** : Vérifier que tout fonctionne en production
+3. **Monitoring** : Surveiller les performances avec Vite 4 
